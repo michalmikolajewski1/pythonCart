@@ -12,7 +12,7 @@
 				<table class="table">
 					<tr>
 						<th><h5>Products: <strong>{{order.cart_products_number}}</strong></h5></th>
-						<th><h5>Total Price: <strong>{{order.sum_total_cart_price}} PLN</strong></h5></th>
+						<th><h5>Total Price: <strong>{{order.sum_total_cart_price|floatformat:2}} PLN</strong></h5></th>
 						<th>
 							<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
 						</th>
@@ -45,7 +45,7 @@
                                     class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
 						</div>
 					</div>
-					<div style="flex:1"><p>{{item.get_total_product_price}} PLN</p></div>
+					<div style="flex:1"><p>{{item.get_total_product_price|floatformat:2}} PLN</p></div>
 				</div>
                 {% endfor %}
 			</div>
