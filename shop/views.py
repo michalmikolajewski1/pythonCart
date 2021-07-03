@@ -7,21 +7,6 @@ import datetime
 
 # Create your views here.
 def shop(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Cart.objects.get_or_create(customer=customer, is_finalised=False)
-        items = order.cartproduct_set.all()
-        cartProducts = order.cart_products_number
-    else:
-        items = []
-        order = {'sum_total_cart_price': 0, 'cart_products_number': 0}
-        cartProducts = order['cart_products_number']
-
-    context = {
-        'items': items,
-        'order': order
-    }
-
     all_products = Product.objects.all()
     context = {
         'all_products': all_products
