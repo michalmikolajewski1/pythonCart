@@ -18,13 +18,13 @@ def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Cart.objects.get_or_create(customer=customer, is_finalised=False)
-        items = order.cartproduct_set.all()
+        cartProduct = order.cartproduct_set.all()
     else:
-        items = []
+        cartProduct = []
         order = {'sum_total_cart_price': 0, 'cart_products_number': 0}
 
     context = {
-        'items': items,
+        'cartProduct': cartProduct,
         'order': order
     }
     return render(request, 'shop/cart.html', context)
@@ -35,16 +35,14 @@ def checkout(request):
         customer = request.user.customer
         order, created = Cart.objects.get_or_create(customer=customer, is_finalised=False)
         cartProduct = order.cartproduct_set.all()
-        cartItems = order.cart_products_number
+
     else:
         cartProduct = []
         order = {'sum_total_cart_price': 0, 'cart_products_number': 0}
-        cartItems = order['cart_products_number']
 
     context = {
         'cartProduct': cartProduct,
         'order': order,
-        'cartItems': cartItems
 
     }
     return render(request, 'shop/checkout.html', context)
